@@ -52,6 +52,25 @@ function calculateShipping(id, cep) {
         });
 }
 
+function searchProduct(){
+    let id = document.getElementById("busca").value
+    fetch('http://localhost:3000/product/' + id)
+        .then((data) => {
+            if (data.ok) {
+                return data.json();
+            }
+            throw data.statusText;
+        })
+        .then((data) => {
+            newBook(data)
+        })
+        .catch((err) => {
+            swal('Erro', 'Erro ao encontrar produto por ID', 'error');
+            console.error(err);
+        });
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const books = document.querySelector('.books');
 
