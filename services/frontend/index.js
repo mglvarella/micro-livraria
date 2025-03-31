@@ -52,24 +52,31 @@ function calculateShipping(id, cep) {
         });
 }
 
-function searchProduct(){
-    let id = document.getElementById("busca").value
-    fetch('http://localhost:3000/product/' + id)
-        .then((data) => {
-            if (data.ok) {
-                return data.json();
+function searchProduct() {
+    let id = document.getElementById("busca").value;
+    if (!id) {
+        console.log("Campo de busca vazio. Recarregando a página...");
+        location.reload();
+        return;
+    }
+
+    fetch("http://localhost:3000/product/" + id)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Produto não encontrado");
             }
-            throw data.statusText;
+            return response.json();
         })
-        .then((data) => {
-            newBook(data)
+        .then((book) => {
+            const booksContainer = document.querySelector('.books');
+            booksContainer.innerHTML = ''; // Limpa os produtos atuais
+            booksContainer.appendChild(newBook(book)); // Adiciona o novo livro ao DOM
         })
         .catch((err) => {
             swal('Erro', 'Erro ao encontrar produto por ID', 'error');
             console.error(err);
         });
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const books = document.querySelector('.books');

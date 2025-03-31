@@ -19,15 +19,17 @@
             </div>
         </section>
         <div class="box cta">
-            <p class="has-text-centered">Uma simples livraria utilizando microservices</p>
-        </div>
-        <div class="box cta field has-text-centered has-addons">
             <div>
-                <input type="text" class="input" id="busca">
+                <p class="has-text-centered">Uma simples livraria utilizando microservices</p>
             </div>
-            <div>
-                <button type="submit" onclick="searchProduct()" class="button button-shipping is-info">Buscar</button>
-            </div>            
+            <div class="center">
+                <div class="spacer">
+                    <input type="text" placeholder="Digite o id do produto" class="input" id="busca">
+                </div>
+                <div class="spacer">
+                    <button type="submit" onclick="searchProduct()" class="button is-info ">Buscar</button>
+                </div>  
+            </div>
         </div>
         <section class="container">
             <div class="columns books"></div>
